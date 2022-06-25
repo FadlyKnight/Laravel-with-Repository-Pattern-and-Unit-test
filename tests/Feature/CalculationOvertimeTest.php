@@ -47,21 +47,24 @@ class CalculationOvertimeTest extends TestCase
         $this->json('GET', 'api/overtime-pays/calculate', $data, ['Accept' => 'application/json'])
             ->assertStatus(200)
             ->assertJsonStructure([
-                0 => [
-                    "id",
-                    "name",
-                    "salary",
-                    "created_at",
-                    "updated_at",
-                    "overtime_duration_total",
-                    "amount",
-                    "overtime"=> [
-                        0 => [
-                            "employee_id",
-                            "time_started",
-                            "time_ended",
-                            "date",
-                            "overtime_duration",
+                "message",
+                "data" => [
+                    0 => [
+                        "id",
+                        "name",
+                        "salary",
+                        "created_at",
+                        "updated_at",
+                        "overtime_duration_total",
+                        "amount",
+                        "overtime"=> [
+                            0 => [
+                                "employee_id",
+                                "time_started",
+                                "time_ended",
+                                "date",
+                                "overtime_duration",
+                            ]
                         ]
                     ]
                 ]
@@ -74,7 +77,10 @@ class CalculationOvertimeTest extends TestCase
         ];
         $this->json('GET', 'api/overtime-pays/calculate', $data, ['Accept' => 'application/json'])
             ->assertStatus(200)
-            ->assertJsonStructure([]);
+            ->assertJsonStructure([
+                "message",
+                "data" => []
+            ]);
     }
 
     

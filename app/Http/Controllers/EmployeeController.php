@@ -35,7 +35,7 @@ class EmployeeController extends Controller
     public function show(OvertimeCalculateRequest $request)
     {
         $employeeWithCalculate = $this->employeeRepository->getAllEmployeesWithCalculateSalary($request->month);
-        return $employeeWithCalculate->toArray();
+        return response()->json(['message'=>'success', 'data' => $employeeWithCalculate->toArray()]);
     }
     
 }
