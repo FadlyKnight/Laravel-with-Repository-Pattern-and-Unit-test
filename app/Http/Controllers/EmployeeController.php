@@ -22,8 +22,7 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-        $this->employeeRepository->createEmployee($request->only(['name','salary']));
-        return response()->json(['message'=>'success']);
+        return response()->json(['message'=>'success','data' => $this->employeeRepository->createEmployee($request->only(['name','salary'])) ]);
     }
     
     /**

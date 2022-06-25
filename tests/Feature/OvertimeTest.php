@@ -40,8 +40,17 @@ class OvertimeTest extends TestCase
         ];
         $this->json('POST', 'api/overtimes', $data, ['Accept' => 'application/json'])
             ->assertStatus(200)
-            ->assertJson([
-                "message" => "success",
+            ->assertJsonStructure([
+                "message",
+                "data" => [
+                    "id",
+                    "employee_id",
+                    "date",
+                    "time_started",
+                    "time_ended",
+                    "created_at",
+                    "updated_at"
+                ]
         ]);
     }
 

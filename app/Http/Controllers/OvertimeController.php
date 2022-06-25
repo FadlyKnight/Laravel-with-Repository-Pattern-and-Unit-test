@@ -23,7 +23,6 @@ class OvertimeController extends Controller
      */
     public function store(StoreOvertimeRequest $request)
     {
-        $this->overtimeRepository->createOvertime($request->validated());
-        return response()->json(['message'=>'success']);
+        return response()->json(['message'=>'success', 'data' => $this->overtimeRepository->createOvertime($request->validated())]);
     }
 }

@@ -28,8 +28,15 @@ class EmployeeTest extends TestCase
         ];
         $this->json('POST', 'api/employees', $data, ['Accept' => 'application/json'])
             ->assertStatus(200)
-            ->assertJson([
-                "message" => "success",
+            ->assertJsonStructure([
+                "message",
+                "data" => [
+                    "id",
+                    "name",
+                    "salary",
+                    "created_at",
+                    "updated_at"
+                ]
         ]);
     }
 
