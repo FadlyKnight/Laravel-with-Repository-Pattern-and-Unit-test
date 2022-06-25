@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\OvertimeDateRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreOvertimeRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class StoreOvertimeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +25,28 @@ class StoreOvertimeRequest extends FormRequest
      */
     public function rules()
     {
+        $employee_id = request()->employee_id;
         return [
-            //
+            'employee_id' => [
+                'required',
+                'integer',
+                'exists:employees,id'
+            ],
+            'date' => [
+                'required',
+                'date',
+                new OvertimeDateRule
+            ],
+            'time_started' => [
+                'required',
+                'date_format:H:i',
+                'before:time_ended'
+            ],
+            'time_ended' => [
+                'required',
+                'date_format:H:i',
+                'after:time_started'
+            ]
         ];
     }
 }

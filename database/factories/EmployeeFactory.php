@@ -14,7 +14,8 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'salary' => $this->faker->numberBetween(2000000,10000000)
         ];
     }
 }

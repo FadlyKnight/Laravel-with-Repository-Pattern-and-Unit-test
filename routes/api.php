@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::patch('/settings', 'SettingController@update');
+Route::post('/employees', 'EmployeeController@store');
+Route::post('/overtimes', 'OvertimeController@store');
+Route::get('/overtime-pays/calculate', 'EmployeeController@show');

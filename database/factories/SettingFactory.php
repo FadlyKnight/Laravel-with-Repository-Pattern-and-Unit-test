@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OvertimeFactory extends Factory
+class SettingFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,10 +14,8 @@ class OvertimeFactory extends Factory
     public function definition()
     {
         return [
-            "employee_id" => 1,
-            "date" => "2022-01-01",
-            "time_started" =>  "10:00",
-            "time_ended" =>  "19:00"
+            "key" => "overtime_method",
+            "value" => "1",
         ];
     }
 }

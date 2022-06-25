@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\SettingValueRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UpdateSettingRequest extends FormRequest
+class OvertimeCalculateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,13 +24,9 @@ class UpdateSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'key' => [
+            'month' => [
                 'required',
-                'in:overtime_method'
-            ],
-            'value' => [
-                'required',
-                new SettingValueRule
+                'date_format:Y-m'
             ],
         ];
     }

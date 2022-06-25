@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Overtime;
 use Illuminate\Database\Seeder;
 
 class OvertimeSeeder extends Seeder
@@ -13,6 +14,6 @@ class OvertimeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Overtime::factory(1)->create();
     }
 }

@@ -2,32 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
+use App\Http\Requests\OvertimeCalculateRequest;
 use App\Http\Requests\StoreEmployeeRequest;
-use App\Http\Requests\UpdateEmployeeRequest;
+use App\Interfaces\EmployeeRepositoryInterface;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    private EmployeeRepositoryInterface $employeeRepository;
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function __construct(EmployeeRepositoryInterface $employeeRepository) 
     {
-        //
+        $this->employeeRepository = $employeeRepository;
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -36,51 +22,20 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-        //
+        $this->employeeRepository->createEmployee($request->only(['name','salary']));
+        return response()->json(['message'=>'success']);
     }
-
+    
     /**
-     * Display the specified resource.
+     * Display the result calculate overtime.
      *
-     * @param  \App\Models\Employee  $employee
+     * @param  \App\Http\Requests\OvertimeCalculateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show(OvertimeCalculateRequest $request)
     {
-        //
+        $employeeWithCalculate = $this->employeeRepository->getAllEmployeesWithCalculateSalary($request->month);
+        return $employeeWithCalculate->toArray();
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateEmployeeRequest  $request
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateEmployeeRequest $request, Employee $employee)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Employee $employee)
-    {
-        //
-    }
+    
 }

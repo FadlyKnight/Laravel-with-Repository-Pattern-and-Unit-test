@@ -14,7 +14,7 @@ class ReferenceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "code" => "overtime_method",
         ];
     }
 }
