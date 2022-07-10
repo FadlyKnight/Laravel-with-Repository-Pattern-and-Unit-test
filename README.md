@@ -1,7 +1,5 @@
 ## HOW TO USE
 
-THIS IS STEP BY STEP HOW TO USE THIS :
-
 - run command ```composer install```.
 - then create `.env` file with command ``` cp .env.example .env ```
 - change value `DB_DATABASE` in `.env`
